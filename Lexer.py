@@ -37,6 +37,7 @@ class Lexer:
         # [0 - 9] +  # Match a number.
         # \b  # Anchor the match to the end of the number.
         # (?!\.[0-9])  # Assert that no decimal part follows.
+        t.value = int(t.value)
         return t
 
     def t_newline(self, t):
