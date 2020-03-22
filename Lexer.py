@@ -2,12 +2,7 @@ from ply import lex
 
 
 class Lexer:
-    # tokens = [
-    #     'ID', 'IF', 'WHILE', 'PRINT',
-    #     'LRB', 'RRB', 'LCB', 'RCB',
-    #     'INTEGER', 'SUM', 'SUB', 'MUL', 'DIV',
-    #     'LT', 'GT', 'SEMICOLON'
-    # ]
+
     tokens = [
         'ID', 'INTEGERNUMBER', 'FLOATNUMBER', 'INTEGER',
         'FLOAT', 'BOOLEAN', 'VOID', 'TRUE', 'FALSE', 'PRINT',
