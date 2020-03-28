@@ -9,11 +9,11 @@ class Lexer:
         'RETURN', 'MAIN', 'IF', 'ELSE', 'ELIF', 'WHILE', 'FOR',
         'AND', 'OR', 'NOT', 'ASSIGN', 'SUM', 'SUB', 'MUL', 'DIV',
         'MOD', 'GT', 'GE', 'LT', 'LE', 'EQ', 'NE', 'LCB', 'RCB', 'LRB',
-        'RRB', 'LSB', 'RSB', 'SEMICOLON', 'COMMA', 'SYNTAXERROR'
+        'RRB', 'LSB', 'RSB', 'SEMICOLON', 'COMMA', 'ERROR'
     ]
 
     reserved = {
-        'int': 'INT',
+        'int': 'INTEGER',
         'float': 'FLOAT',
         'boolean': 'BOOLEAN',
         'void': 'VOID',
@@ -54,7 +54,7 @@ class Lexer:
     t_GE = r'>='
     t_LT = r'\<'
     t_LE = r'<='
-    t_EQ = r'='
+    t_EQ = r'\=\='
     t_NE = r'!='
     # KW
     t_INTEGER = r'int'
@@ -75,8 +75,9 @@ class Lexer:
 
     def t_ID(self, t):
         r'[a-zA-Z_][a-zA-Z0-9_]*'
-        if t.value in Lexer.reserved:
-            t.type = Lexer.reserved[t.value]
+        t.type = Lexer.reserved.get(t.value, 'ID')
+        # if t.value in Lexer.reserved:
+        #     t.type = Lexer.reserved[t.value]
         return t
 
     def t_INTEGERNUMBER(self, t):
@@ -91,27 +92,30 @@ class Lexer:
         t.value = int(t.value)
         return t
     def t_FLOATNUMBER(self, t):
-        # r'[+|-]?\d*(\.)\d+'
+        r'(\d){,9}(\.)(\d)+(?=[^.])'
+        # r'[+|-]?(\d){,9}(\.)(\d)+(?=[^.])'
         # r'[-+]?[0-9]+(\.([0-9]+)?([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)'
-        r'[-+]?[0-9]+(\.([0-9]+)?([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)'
+        # r'[-+]?[0-9]+(\.([0-9]+)?([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)'
         t.value = float(t.value)
         return t
 
+    t_ignore = '\n \t'
 
-    # def t_SYNTAXERROR(self, t):
-    #     r'19a'
-    #     t.type = ''
-    #     return t
+    def t_ERROR(self, t):
+        # r'([\+\-*/]?[\+\-*/]+[\+\-*/]+) | (\d+[a-zA-Z_][a-zA-Z0-9_]*) | ([+|-]?\d*(\.)\d+((\.)\d+)+) | [+|-]?(\d){10,}(\.)(\d)+(?=[^.])'
+        r'([\+\-*/%]?[\+\-*/%]+[\+\-*/%]+) | (\d+[a-zA-Z_][a-zA-Z0-9_]*) | (\d*(\.)\d+((\.)\d+)+) | (\d){10,}(\.)(\d)+(?=[^.])'
+        return t
 
     def t_newline(self, t):
         r'\n+'
         t.lexer.lineno += len(t.value)
 
-    t_ignore = '\n \t'
 
     def t_error(self, t):
-        print('ERROR')
+        # print('ERROR')
         t.lexer.skip(1)
+        t.type = 'ERROR'
+        return t
         # raise Exception('Error at', t.value)
 
     def build(self, **kwargs):
