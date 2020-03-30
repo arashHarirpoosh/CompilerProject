@@ -1,6 +1,6 @@
 from Lexer import Lexer
 lexer = Lexer().build()
-file = open('TestCases/test.txt')
+file = open('TestCases/test3.txt')
 text_input = file.read()
 file.close()
 lexer.input(text_input)
