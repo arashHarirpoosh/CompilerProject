@@ -12,3 +12,5 @@ while True:
     print(tok)
     res.write(str(tok)+'\n')
 
+res.close()
+
