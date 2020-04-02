@@ -84,7 +84,8 @@ class Lexer:
         # r'([-|+]?(\d+))'                   # error(3+2)
         # r'(^[-|+]?(\d+)) | (\d+)'          # error(3+(-2))
         # r'[+|-]?(?<!\.)\b[0-9]+\b(?!\.[0-9])' # error(3+2)
-        r'(?<!\.)\b[0-9]+\b(?!\.[0-9])' # unsigned int number
+        # r'(?<!\.)\b[0-9]+\b(?!\.[0-9])' # unsigned int number
+        r'(?<!\.)\b[0-9]{1,9}\b(?!\.[0-9])' # unsigned int number
         # (? < ![-.])  # Assert that the previous character isn't a minus sign or a dot.
         # \b  # Anchor the match to the start of a number.
         # [0 - 9] +  # Match a number.
@@ -94,6 +95,7 @@ class Lexer:
         return t
     def t_FLOATNUMBER(self, t):
         r'(\d){,9}(\.)(\d)+(?=[^.])' # unsigned float number
+        # (?=[^.]) # Assert that no other parts follows after floating point
         # r'[+|-]?(\d){,9}(\.)(\d)+(?=[^.])'
         # r'[-+]?[0-9]+(\.([0-9]+)?([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)'
         # r'[-+]?[0-9]+(\.([0-9]+)?([eE][-+]?[0-9]+)?|[eE][-+]?[0-9]+)'
@@ -104,7 +106,7 @@ class Lexer:
 
     def t_ERROR(self, t):
         # r'([\+\-*/]?[\+\-*/]+[\+\-*/]+) | (\d+[a-zA-Z_][a-zA-Z0-9_]*) | ([+|-]?\d*(\.)\d+((\.)\d+)+) | [+|-]?(\d){10,}(\.)(\d)+(?=[^.])'
-        r'([\+\-*/%]?[\+\-*/%]+[\+\-*/%]+) | (\d+[a-zA-Z_][a-zA-Z0-9_]*) | (\d*(\.)\d+((\.)\d+)+) | (\d){10,}(\.)(\d)+(?=[^.])'
+        r'(([\+\-*/][ ]?){2,}) | (\d+[a-zA-Z_][a-zA-Z0-9_]*) | (\d*(\.)\d+((\.)\d+)+) | (\d){10,}(\.)(\d)+(?=[^.]) | (?<!\.)\b[0-9]{10,}\b(?!\.[0-9])'
         return t
 
     def t_newline(self, t):
