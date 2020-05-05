@@ -16,9 +16,13 @@ class Parser:
         """)
 
     def p_declist(self, p):
+        # """
+        # declist : dec
+        #         | declist dec
+        #         |
+        # """
         """
-        declist : dec
-                | declist dec
+        declist : declist dec
                 |
         """
         print("""
@@ -121,14 +125,17 @@ class Parser:
          """)
 
     def p_varlist(self, p):
+        # """
+        # varlist : vardec
+        #         | varlist vardec
+        #         |
+        # """
         """
-        varlist : vardec
-                | varlist vardec
+        varlist : vardec varlist
                 |
         """
         print("""
-        varlist : vardec 
-                | varlist vardec 
+        varlist : vardec  varlist 
                 | 
          """)
 
@@ -141,12 +148,19 @@ class Parser:
          """)
 
     def p_stmtlist(self, p):
+        # """
+        # stmtlist : stmt
+        #          | stmtlist stmt
+        #          |
+        # """
         """
-        stmtlist : stmt
-                 | stmtlist stmt
+        stmtlist :  stmtlist stmt
                  |
         """
         print("""
+        stmtlist : stmt
+                 | stmtlist stmt
+                 |
          """)
 
     def p_lvalue(self, p):
@@ -166,9 +180,10 @@ class Parser:
              | block
              | WHILE LRB exp RRB stmt
              | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-             | IF LRB exp RRB stmt elseiflist
-             | IF LRB exp RRB stmt elseiflist ELSE stmt
+             | IF LRB exp RRB stmt elseiflist other
              | PRINT LRB ID RRB SEMICOLON
+        other : ELSE stmt
+              | %prec IF
         """
         print("""
         stmt : RETURN exp SEMICOLON
@@ -182,9 +197,13 @@ class Parser:
          """)
 
     def p_elseiflist(self, p):
+        # """
+        # elseiflist : ELIF LRB exp RRB stmt
+        #            | elseiflist ELIF LRB exp RRB stmt
+        #            |
+        # """
         """
-        elseiflist : ELIF LRB exp RRB stmt
-                   | elseiflist ELIF LRB exp RRB stmt
+        elseiflist :  elseiflist ELIF LRB exp RRB stmt
                    |
         """
         print("""
@@ -206,6 +225,19 @@ class Parser:
             | SUB exp
             | NOT exp
         """
+        # """
+        # exp : lvalue ASSIGN exp
+        #     | exp exp_fac
+        #     | const
+        #     | lvalue
+        #     | ID LRB explist RRB
+        #     | LRB exp RRB
+        #     | ID LRB RRB
+        #     | SUB exp
+        #     | NOT exp
+        # exp_fac : operator exp
+        #         | relop exp
+        # """
         print("""
         exp : lvalue ASSIGN exp
             | exp operator exp
@@ -218,7 +250,6 @@ class Parser:
             | SUB exp
             | NOT exp
          """)
-
     def p_operator(self, p):
         """
         operator : OR
@@ -284,8 +315,17 @@ class Parser:
     # Deeper Tokens Higher Priority
     precedence = (
         ('nonassoc', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
+        ('left', 'VOID', 'INTEGER', 'FLOAT', 'BOOLEAN'),
+        ('right', 'ASSIGN', 'NOT'),
+        # ('right', 'NOT'),
+        ('left', 'OR', 'AND'),
         ('left', 'SUM', 'SUB'),
-        ('left', 'MUL', 'DIV')
+        ('left', 'MUL', 'DIV'),
+        ('left', 'IF'),
+        ('if', 'IF'),
+        ('left', 'ELIF', 'ELSE'),
+        ('left', 'RRB')
+        # ('nonassoc', 'ELSE')
     )
 
     def p_error(self, p):
