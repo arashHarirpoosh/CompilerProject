@@ -1768,50 +1768,37 @@ state 83
     (66) relop -> . GE
     (67) relop -> . LE
 
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for SUM resolved as shift
-  ! shift/reduce conflict for SUB resolved as shift
-  ! shift/reduce conflict for MUL resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NE resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for GE resolved as shift
-  ! shift/reduce conflict for LE resolved as shift
     RSB             reduce using rule 42 (exp -> exp operator exp .)
+    OR              reduce using rule 42 (exp -> exp operator exp .)
+    AND             reduce using rule 42 (exp -> exp operator exp .)
+    SUM             reduce using rule 42 (exp -> exp operator exp .)
+    SUB             reduce using rule 42 (exp -> exp operator exp .)
+    MUL             reduce using rule 42 (exp -> exp operator exp .)
+    DIV             reduce using rule 42 (exp -> exp operator exp .)
+    MOD             reduce using rule 42 (exp -> exp operator exp .)
+    GT              reduce using rule 42 (exp -> exp operator exp .)
+    LT              reduce using rule 42 (exp -> exp operator exp .)
+    NE              reduce using rule 42 (exp -> exp operator exp .)
+    EQ              reduce using rule 42 (exp -> exp operator exp .)
+    GE              reduce using rule 42 (exp -> exp operator exp .)
+    LE              reduce using rule 42 (exp -> exp operator exp .)
     SEMICOLON       reduce using rule 42 (exp -> exp operator exp .)
     COMMA           reduce using rule 42 (exp -> exp operator exp .)
     RRB             reduce using rule 42 (exp -> exp operator exp .)
-    OR              shift and go to state 56
-    AND             shift and go to state 57
-    SUM             shift and go to state 58
-    SUB             shift and go to state 59
-    MUL             shift and go to state 60
-    DIV             shift and go to state 61
-    MOD             shift and go to state 62
-    GT              shift and go to state 63
-    LT              shift and go to state 64
-    NE              shift and go to state 65
-    EQ              shift and go to state 66
-    GE              shift and go to state 67
-    LE              shift and go to state 68
 
-  ! OR              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! AND             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! SUM             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! SUB             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! MUL             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! DIV             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! MOD             [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! GT              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! LT              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! NE              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! EQ              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! GE              [ reduce using rule 42 (exp -> exp operator exp .) ]
-  ! LE              [ reduce using rule 42 (exp -> exp operator exp .) ]
+  ! OR              [ shift and go to state 56 ]
+  ! AND             [ shift and go to state 57 ]
+  ! SUM             [ shift and go to state 58 ]
+  ! SUB             [ shift and go to state 59 ]
+  ! MUL             [ shift and go to state 60 ]
+  ! DIV             [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! GT              [ shift and go to state 63 ]
+  ! LT              [ shift and go to state 64 ]
+  ! NE              [ shift and go to state 65 ]
+  ! EQ              [ shift and go to state 66 ]
+  ! GE              [ shift and go to state 67 ]
+  ! LE              [ shift and go to state 68 ]
 
     operator                       shift and go to state 54
     relop                          shift and go to state 55
@@ -1835,20 +1822,14 @@ state 84
     (66) relop -> . GE
     (67) relop -> . LE
 
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for SUM resolved as shift
-  ! shift/reduce conflict for SUB resolved as shift
-  ! shift/reduce conflict for MUL resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NE resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for GE resolved as shift
-  ! shift/reduce conflict for LE resolved as shift
     RSB             reduce using rule 43 (exp -> exp relop exp .)
+    MOD             reduce using rule 43 (exp -> exp relop exp .)
+    GT              reduce using rule 43 (exp -> exp relop exp .)
+    LT              reduce using rule 43 (exp -> exp relop exp .)
+    NE              reduce using rule 43 (exp -> exp relop exp .)
+    EQ              reduce using rule 43 (exp -> exp relop exp .)
+    GE              reduce using rule 43 (exp -> exp relop exp .)
+    LE              reduce using rule 43 (exp -> exp relop exp .)
     SEMICOLON       reduce using rule 43 (exp -> exp relop exp .)
     COMMA           reduce using rule 43 (exp -> exp relop exp .)
     RRB             reduce using rule 43 (exp -> exp relop exp .)
@@ -1858,13 +1839,6 @@ state 84
     SUB             shift and go to state 59
     MUL             shift and go to state 60
     DIV             shift and go to state 61
-    MOD             shift and go to state 62
-    GT              shift and go to state 63
-    LT              shift and go to state 64
-    NE              shift and go to state 65
-    EQ              shift and go to state 66
-    GE              shift and go to state 67
-    LE              shift and go to state 68
 
   ! OR              [ reduce using rule 43 (exp -> exp relop exp .) ]
   ! AND             [ reduce using rule 43 (exp -> exp relop exp .) ]
@@ -1872,13 +1846,13 @@ state 84
   ! SUB             [ reduce using rule 43 (exp -> exp relop exp .) ]
   ! MUL             [ reduce using rule 43 (exp -> exp relop exp .) ]
   ! DIV             [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! MOD             [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! GT              [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! LT              [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! NE              [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! EQ              [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! GE              [ reduce using rule 43 (exp -> exp relop exp .) ]
-  ! LE              [ reduce using rule 43 (exp -> exp relop exp .) ]
+  ! MOD             [ shift and go to state 62 ]
+  ! GT              [ shift and go to state 63 ]
+  ! LT              [ shift and go to state 64 ]
+  ! NE              [ shift and go to state 65 ]
+  ! EQ              [ shift and go to state 66 ]
+  ! GE              [ shift and go to state 67 ]
+  ! LE              [ shift and go to state 68 ]
 
     relop                          shift and go to state 55
     operator                       shift and go to state 54
@@ -3237,32 +3211,3 @@ state 133
     ELIF            reduce using rule 39 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
     ELSE            reduce using rule 39 (elseiflist -> elseiflist ELIF LRB exp RRB stmt .)
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for OR in state 83 resolved as shift
-WARNING: shift/reduce conflict for AND in state 83 resolved as shift
-WARNING: shift/reduce conflict for SUM in state 83 resolved as shift
-WARNING: shift/reduce conflict for SUB in state 83 resolved as shift
-WARNING: shift/reduce conflict for MUL in state 83 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 83 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 83 resolved as shift
-WARNING: shift/reduce conflict for GT in state 83 resolved as shift
-WARNING: shift/reduce conflict for LT in state 83 resolved as shift
-WARNING: shift/reduce conflict for NE in state 83 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 83 resolved as shift
-WARNING: shift/reduce conflict for GE in state 83 resolved as shift
-WARNING: shift/reduce conflict for LE in state 83 resolved as shift
-WARNING: shift/reduce conflict for OR in state 84 resolved as shift
-WARNING: shift/reduce conflict for AND in state 84 resolved as shift
-WARNING: shift/reduce conflict for SUM in state 84 resolved as shift
-WARNING: shift/reduce conflict for SUB in state 84 resolved as shift
-WARNING: shift/reduce conflict for MUL in state 84 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 84 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 84 resolved as shift
-WARNING: shift/reduce conflict for GT in state 84 resolved as shift
-WARNING: shift/reduce conflict for LT in state 84 resolved as shift
-WARNING: shift/reduce conflict for NE in state 84 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 84 resolved as shift
-WARNING: shift/reduce conflict for GE in state 84 resolved as shift
-WARNING: shift/reduce conflict for LE in state 84 resolved as shift

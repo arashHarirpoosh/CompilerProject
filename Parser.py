@@ -182,19 +182,51 @@ class Parser:
              | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
              | IF LRB exp RRB stmt elseiflist other
              | PRINT LRB ID RRB SEMICOLON
-        other : ELSE stmt
-              | %prec IF
+       other : ELSE stmt
+             | %prec IF
         """
-        print("""
-        stmt : RETURN exp SEMICOLON
-             | exp SEMICOLON
-             | block
-             | WHILE LRB exp RRB stmt 
-             | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt 
-             | IF LRB exp RRB stmt elseiflist 
-             | IF LRB exp RRB stmt elseiflist ELSE stmt 
-             | PRINT LRB ID RRB SEMICOLON
-         """)
+       #  """
+       #  stmt : RETURN exp SEMICOLON
+       #       | exp SEMICOLON
+       #       | block
+       #       | WHILE LRB exp RRB stmt
+       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+       #       | IF LRB exp RRB stmt elseiflist other
+       #       | PRINT LRB ID RRB SEMICOLON
+       # other : ELSE stmt
+       #       | epsilon
+       #  """
+       #  print("""
+       #  stmt : RETURN exp SEMICOLON
+       #       | exp SEMICOLON
+       #       | block
+       #       | WHILE LRB exp RRB stmt
+       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+       #       | IF LRB exp RRB stmt elseiflist other
+       #       | PRINT LRB ID RRB SEMICOLON
+       # other : ELSE stmt
+       #       | epsilon
+       #  """)
+       # """
+       #  stmt : RETURN exp SEMICOLON
+       #       | exp SEMICOLON
+       #       | block
+       #       | WHILE LRB exp RRB stmt
+       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+       #       | IF LRB exp RRB stmt elseiflist
+       #       | IF LRB exp RRB stmt elseiflist IF ELSE stmt
+       #       | PRINT LRB ID RRB SEMICOLON
+       #   """
+       # print("""
+       #  stmt : RETURN exp SEMICOLON
+       #       | exp SEMICOLON
+       #       | block
+       #       | WHILE LRB exp RRB stmt
+       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+       #       | IF LRB exp RRB stmt elseiflist
+       #       | IF LRB exp RRB stmt elseiflist ELSE stmt
+       #       | PRINT LRB ID RRB SEMICOLON
+       #   """)
 
     def p_elseiflist(self, p):
         # """
@@ -215,8 +247,8 @@ class Parser:
     def p_exp(self, p):
         """
         exp : lvalue ASSIGN exp
-            | exp operator exp
-            | exp relop exp
+            | exp operator exp %prec MUL
+            | exp relop exp %prec GT
             | const
             | lvalue
             | ID LRB explist RRB
@@ -314,22 +346,24 @@ class Parser:
 
     # Deeper Tokens Higher Priority
     precedence = (
-        ('nonassoc', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
+        ('left', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
         ('left', 'VOID', 'INTEGER', 'FLOAT', 'BOOLEAN'),
-        ('right', 'ASSIGN', 'NOT'),
-        # ('right', 'NOT'),
+        ('right', 'ASSIGN', 'NOT', 'SEMICOLON'),
+        ('left', 'LCB', 'LRB', 'LSB'),
+        ('right', 'RCB', 'RRB', 'RSB'),
+        ('right', 'NOT'),
         ('left', 'OR', 'AND'),
         ('left', 'SUM', 'SUB'),
         ('left', 'MUL', 'DIV'),
+        # ('right', 'IF'),
         ('left', 'IF'),
-        ('if', 'IF'),
-        ('left', 'ELIF', 'ELSE'),
-        ('left', 'RRB')
+        # ('right', 'epsilon'),
+        ('left', 'ELIF', 'ELSE')
         # ('nonassoc', 'ELSE')
     )
 
     def p_error(self, p):
-        print(p.value)
+        print('error', p.value)
         raise Exception('Parsing Error: invalid grammar at', p)
 
     def build(self, **kwargs):

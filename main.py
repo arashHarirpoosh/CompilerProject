@@ -14,7 +14,7 @@ lexer.input(text_input)
 #     tok = lexer.token()
 #     if not tok: break
 #     print(tok)
-#     lexer_res.write(str(tok)+'\n')
+    # lexer_res.write(str(tok)+'\n')
 #
 # lexer_res.close()
 
