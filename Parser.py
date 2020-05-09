@@ -16,63 +16,99 @@ class Parser:
         """)
 
     def p_declist(self, p):
-        # """
-        # declist : dec
-        #         | declist dec
-        #         |
-        # """
         """
         declist : declist dec
-                |
         """
         print("""
-        declist : dec 
-                | declist dec 
-                |  
+        declist :  declist dec 
+        """)
+
+    def p_declist_Landa(self, p):
+        """
+        declist :
+        """
+        print("""
+        declist : 
         """)
 
     def p_dec(self, p):
         """
         dec : vardec
-            | funcdec
         """
         print("""
         dec : vardec
-            | funcdec
         """)
 
-    def p_type(self, p):
+    def p_dec_funcdec(self, p):
+        """
+        dec : funcdec
+        """
+        print("""
+        dec : funcdec
+        """)
+
+    def p_type_INTEGER(self, p):
         """
         type : INTEGER
-             | FLOAT
-             | BOOLEAN
         """
         print("""
         type : INTEGER
-             | FLOAT
-             | BOOLEAN
+        """)
+
+    def p_type_Float(self, p):
+        """
+        type : FLOAT
+        """
+        print("""
+        type : FLOAT
+        """)
+
+    def p_type_BOOLEAN(self, p):
+        """
+        type : BOOLEAN
+        """
+        print("""
+        type : BOOLEAN
         """)
 
     def p_iddec(self, p):
         """
         iddec : ID
-              | ID LSB exp RSB
-              | ID ASSIGN exp
         """
         print("""
         iddec : ID
-              | ID LSB exp RSB
-              | ID ASSIGN exp
+         """)
+
+    def p_iddec_LSB(self, p):
+        """
+        iddec : ID LSB exp RSB
+        """
+        print("""
+        iddec : ID LSB exp RSB
+         """)
+
+    def p_iddec_ASSIGN(self, p):
+        """
+        iddec : ID ASSIGN exp
+        """
+        print("""
+        iddec : ID ASSIGN exp
          """)
 
     def p_idlist(self, p):
         """
         idlist : iddec
-               | idlist COMMA iddec
         """
         print("""
         idlist : iddec
-               | idlist COMMA iddec
+         """)
+
+    def p_idlist_idlist(self, p):
+        """
+        idlist : idlist COMMA iddec
+        """
+        print("""
+        idlist : idlist COMMA iddec
          """)
 
     def p_vardec(self, p):
@@ -87,56 +123,81 @@ class Parser:
     def p_funcdec(self, p):
         """
         funcdec : type ID LRB paramdecs RRB block
-                | VOID ID LRB paramdecs RRB block
         """
         print("""
         funcdec : type ID LRB paramdecs RRB block 
-                | VOID ID LRB paramdecs RRB block
+         """)
+
+    def p_funcdec_VOID(self, p):
+        """
+        funcdec : VOID ID LRB paramdecs RRB block
+        """
+        print("""
+        funcdec : VOID ID LRB paramdecs RRB block
          """)
 
     def p_paramdecs(self, p):
         """
         paramdecs : paramdecslist
-                  |
         """
         print("""
         paramdecs : paramdecslist
-                  |
+         """)
+
+    def p_paramdecs_Landa(self, p):
+        """
+        paramdecs :
+        """
+        print("""
+        paramdecs : 
          """)
 
     def p_paramdecslist(self, p):
         """
         paramdecslist : paramdec
-                      | paramdecslist COMMA paramdec
         """
         print("""
         paramdecslist : paramdec
-                      | paramdecslist COMMA paramdec
+         """)
+
+    def p_paramdecslist_COMMA(self, p):
+        """
+        paramdecslist : paramdecslist COMMA paramdec
+        """
+        print("""
+        paramdecslist : paramdecslist COMMA paramdec
          """)
 
     def p_paramdec(self, p):
         """
         paramdec : type ID
-                 | type ID LSB RSB
         """
         print("""
         paramdec : type ID
-                 | type ID LSB RSB
+         """)
+
+    def p_paramdec_type(self, p):
+        """
+        paramdec : type ID LSB RSB
+        """
+        print("""
+        paramdec : type ID LSB RSB
          """)
 
     def p_varlist(self, p):
-        # """
-        # varlist : vardec
-        #         | varlist vardec
-        #         |
-        # """
         """
         varlist : vardec varlist
-                |
         """
         print("""
         varlist : vardec  varlist 
-                | 
+         """)
+
+    def p_varlist_Landa(self, p):
+        """
+        varlist :
+        """
+        print("""
+        varlist : 
          """)
 
     def p_block(self, p):
@@ -148,220 +209,387 @@ class Parser:
          """)
 
     def p_stmtlist(self, p):
-        # """
-        # stmtlist : stmt
-        #          | stmtlist stmt
-        #          |
-        # """
         """
-        stmtlist :  stmtlist stmt
-                 |
+        stmtlist : stmtlist stmt
         """
         print("""
-        stmtlist : stmt
-                 | stmtlist stmt
-                 |
+        stmtlist : stmtlist stmt
+         """)
+
+    def p_stmtlist_Landa(self, p):
+        """
+        stmtlist :
+        """
+        print("""
+        stmtlist : 
          """)
 
     def p_lvalue(self, p):
         """
         lvalue : ID
-               | ID LSB exp RSB
         """
         print("""
         lvalue : ID 
-               | ID LSB exp RSB
          """)
 
-    def p_stmt(self, p):
+    def p_lvalue_ID(self, p):
+        """
+        lvalue : ID LSB exp RSB
+        """
+        print("""
+        lvalue : ID LSB exp RSB
+         """)
+
+    def p_stmt_RETURN(self, p):
         """
         stmt : RETURN exp SEMICOLON
-             | exp SEMICOLON
-             | block
-             | WHILE LRB exp RRB stmt
-             | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-             | IF LRB exp RRB stmt elseiflist other
-             | PRINT LRB ID RRB SEMICOLON
-       other : ELSE stmt
-             | %prec IF
         """
-       #  """
-       #  stmt : RETURN exp SEMICOLON
-       #       | exp SEMICOLON
-       #       | block
-       #       | WHILE LRB exp RRB stmt
-       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-       #       | IF LRB exp RRB stmt elseiflist other
-       #       | PRINT LRB ID RRB SEMICOLON
-       # other : ELSE stmt
-       #       | epsilon
-       #  """
-       #  print("""
-       #  stmt : RETURN exp SEMICOLON
-       #       | exp SEMICOLON
-       #       | block
-       #       | WHILE LRB exp RRB stmt
-       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-       #       | IF LRB exp RRB stmt elseiflist other
-       #       | PRINT LRB ID RRB SEMICOLON
-       # other : ELSE stmt
-       #       | epsilon
-       #  """)
-       # """
-       #  stmt : RETURN exp SEMICOLON
-       #       | exp SEMICOLON
-       #       | block
-       #       | WHILE LRB exp RRB stmt
-       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-       #       | IF LRB exp RRB stmt elseiflist
-       #       | IF LRB exp RRB stmt elseiflist IF ELSE stmt
-       #       | PRINT LRB ID RRB SEMICOLON
-       #   """
-       # print("""
-       #  stmt : RETURN exp SEMICOLON
-       #       | exp SEMICOLON
-       #       | block
-       #       | WHILE LRB exp RRB stmt
-       #       | FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
-       #       | IF LRB exp RRB stmt elseiflist
-       #       | IF LRB exp RRB stmt elseiflist ELSE stmt
-       #       | PRINT LRB ID RRB SEMICOLON
-       #   """)
+        print("""
+        stmt : RETURN exp SEMICOLON
+        """)
+
+    def p_stmt_exp(self, p):
+        """
+        stmt : exp SEMICOLON
+        """
+        print("""
+        stmt : exp SEMICOLON
+        """)
+
+    def p_stmt_block(self, p):
+        """
+        stmt : block
+        """
+        print("""
+        stmt : block
+        """)
+
+    def p_stmt_WHILE(self, p):
+        """
+        stmt : WHILE LRB exp RRB stmt
+        """
+        print("""
+        stmt : WHILE LRB exp RRB stmt
+        """)
+
+    def p_stmt_FOR(self, p):
+        """
+        stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+        """
+        print("""
+        stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+        """)
+
+    def p_stmt_IF(self, p):
+        """
+        stmt : IF LRB exp RRB stmt elseiflist other
+        """
+        print("""
+        stmt : IF LRB exp RRB stmt elseiflist other
+        """)
+
+    def p_stmt_PRINT(self, p):
+        """
+        stmt : PRINT LRB ID RRB SEMICOLON
+        """
+        print("""
+        stmt : PRINT LRB ID RRB SEMICOLON
+        """)
+
+    def p_other(self, p):
+        """
+        other : ELSE stmt
+        """
+        print("""
+        other : ELSE stmt
+        """)
+
+    def p_other_Landa(self, p):
+        """
+        other : %prec IF
+        """
+        print("""
+        other : 
+        """)
 
     def p_elseiflist(self, p):
-        # """
-        # elseiflist : ELIF LRB exp RRB stmt
-        #            | elseiflist ELIF LRB exp RRB stmt
-        #            |
-        # """
         """
-        elseiflist :  elseiflist ELIF LRB exp RRB stmt
-                   |
+        elseiflist : elseiflist ELIF LRB exp RRB stmt
         """
         print("""
-        elseiflist : ELIF LRB exp RRB stmt 
-                   | elseiflist ELIF LRB exp RRB stmt 
-                   | 
+        elseiflist : elseiflist ELIF LRB exp RRB stmt 
          """)
 
-    def p_exp(self, p):
+    def p_elseiflist_Landa(self, p):
+        """
+        elseiflist :
+        """
+        print("""
+        elseiflist : 
+         """)
+
+    def p_exp_lvalue(self, p):
         """
         exp : lvalue ASSIGN exp
-            | exp operator exp %prec MUL
-            | exp relop exp %prec GT
-            | const
-            | lvalue
-            | ID LRB explist RRB
-            | LRB exp RRB
-            | ID LRB RRB
-            | SUB exp
-            | NOT exp
         """
-        # """
-        # exp : lvalue ASSIGN exp
-        #     | exp exp_fac
-        #     | const
-        #     | lvalue
-        #     | ID LRB explist RRB
-        #     | LRB exp RRB
-        #     | ID LRB RRB
-        #     | SUB exp
-        #     | NOT exp
-        # exp_fac : operator exp
-        #         | relop exp
-        # """
         print("""
         exp : lvalue ASSIGN exp
-            | exp operator exp
-            | exp relop exp
-            | const
-            | lvalue
-            | ID LRB explist RRB
-            | LRB exp RRB
-            | ID LRB RRB
-            | SUB exp
-            | NOT exp
          """)
-    def p_operator(self, p):
+
+    def p_exp_operator(self, p):
+        """
+        exp : exp operator exp %prec MUL
+        """
+        print("""
+        exp : exp operator exp
+         """)
+
+    def p_exp_relop(self, p):
+        """
+        exp : exp relop exp %prec GT
+        """
+        print("""
+        exp : exp relop exp
+         """)
+
+    def p_exp_const(self, p):
+        """
+        exp : const
+        """
+        print("""
+        exp : const
+         """)
+
+    def p_exp_lval(self, p):
+        """
+        exp : lvalue
+        """
+        print("""
+        exp : lvalue
+         """)
+
+    def p_exp_ID(self, p):
+        """
+        exp : ID LRB explist RRB
+        """
+        print("""
+        exp : ID LRB explist RRB
+         """)
+
+    def p_exp_LRB(self, p):
+        """
+        exp : LRB exp RRB
+        """
+        print("""
+        exp : LRB exp RRB
+        """)
+
+    def p_exp_ID_LRB(self, p):
+        """
+        exp : ID LRB RRB
+        """
+        print("""
+        exp : ID LRB RRB
+         """)
+
+    def p_exp_SUB(self, p):
+        """
+        exp : SUB exp
+        """
+        print("""
+        exp : SUB exp
+         """)
+
+    def p_exp_NOT(self, p):
+        """
+        exp : NOT exp
+        """
+        print("""
+        exp : NOT exp
+         """)
+
+    def p_operator_OR(self, p):
         """
         operator : OR
-                 | AND
-                 | SUM
-                 | SUB
-                 | MUL
-                 | DIV
-                 | MOD
         """
         print("""
         operator : OR 
-                 | AND 
-                 | SUM 
-                 | SUB 
-                 | MUL 
-                 | DIV 
-                 | MOD
          """)
 
-    def p_const(self, p):
+    def p_operator_AND(self, p):
+        """
+        operator : AND
+        """
+        print("""
+        operator : AND
+         """)
+
+    def p_operator_SUM(self, p):
+        """
+        operator : SUM
+        """
+        print("""
+        operator : SUM
+         """)
+    def p_operator_SUB(self, p):
+        """
+        operator : SUB
+        """
+        print("""
+        operator : SUB
+         """)
+
+    def p_operator_MUL(self, p):
+        """
+        operator : MUL
+        """
+        print("""
+        operator : MUL
+         """)
+
+    def p_operator_DIV(self, p):
+        """
+        operator : DIV
+        """
+        print("""
+        operator : DIV
+         """)
+
+    def p_operator_MOD(self, p):
+        """
+        operator : MOD
+        """
+        print("""
+        operator : MOD
+         """)
+
+    def p_const_INT(self, p):
         """
         const : INTEGERNUMBER
-              | FLOATNUMBER
-              | TRUE
-              | FALSE
         """
         print("""
         const : INTEGERNUMBER 
-              | FLOATNUMBER 
-              | TRUE 
-              | FALSE
          """)
 
-    def p_relop(self, p):
+    def p_const_FLOAT(self, p):
+        """
+        const : FLOATNUMBER
+        """
+        print("""
+        const : FLOATNUMBER
+         """)
+
+    def p_const_TRUE(self, p):
+        """
+        const : TRUE
+        """
+        print("""
+        const : TRUE
+         """)
+
+    def p_const_FALSE(self, p):
+        """
+        const : FALSE
+        """
+        print("""
+        const : FALSE
+         """)
+
+    def p_relop_GT(self, p):
         """
         relop : GT
-              | LT
-              | NE
-              | EQ
-              | GE
-              | LE
         """
         print("""
         relop : GT 
-              | LT 
-              | NE 
-              | EQ 
-              | GE 
-              | LE
+         """)
+
+    def p_relop_LT(self, p):
+        """
+        relop : LT
+        """
+        print("""
+        relop : LT
+         """)
+
+    def p_relop_NE(self, p):
+        """
+        relop : NE
+        """
+        print("""
+        relop : NE
+         """)
+
+    def p_relop_EQ(self, p):
+        """
+        relop : EQ
+        """
+        print("""
+        relop : EQ
+         """)
+
+    def p_relop_GE(self, p):
+        """
+        relop : GE
+        """
+        print("""
+        relop : GE
+         """)
+
+    def p_relop_LE(self, p):
+        """
+        relop : LE
+        """
+        print("""
+        relop : LE
          """)
 
     def p_explist(self, p):
         """
         explist : exp
-                | explist COMMA exp
         """
         print("""
         explist : exp 
-                | explist COMMA exp
+         """)
+
+    def p_explist_COMMA(self, p):
+        """
+        explist : explist COMMA exp
+        """
+        print("""
+        explist : explist COMMA exp
          """)
 
     # Deeper Tokens Higher Priority
+    # precedence = (
+    #     ('left', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
+    #     ('left', 'VOID', 'INTEGER', 'FLOAT', 'BOOLEAN'),
+    #     ('right', 'ASSIGN', 'NOT', 'SEMICOLON'),
+    #     ('left', 'LCB', 'LRB', 'LSB'),
+    #     ('right', 'RCB', 'RRB', 'RSB'),
+    #     ('right', 'NOT'),
+    #     ('left', 'OR', 'AND'),
+    #     ('left', 'SUM', 'SUB'),
+    #     ('left', 'MUL', 'DIV'),
+    #     # ('right', 'IF'),
+    #     ('left', 'IF'),
+    #     # ('right', 'epsilon'),
+    #     ('left', 'ELIF', 'ELSE')
+    #     # ('nonassoc', 'ELSE')
+    # )
     precedence = (
-        ('left', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
-        ('left', 'VOID', 'INTEGER', 'FLOAT', 'BOOLEAN'),
-        ('right', 'ASSIGN', 'NOT', 'SEMICOLON'),
-        ('left', 'LCB', 'LRB', 'LSB'),
-        ('right', 'RCB', 'RRB', 'RSB'),
-        ('right', 'NOT'),
-        ('left', 'OR', 'AND'),
+        ('left', 'COMMA'),
+        ('right', 'ASSIGN'),
+        ('left', 'OR'),
+        ('left', 'AND'),
+        ('left', 'EQ', 'NE'),
+        ('left', 'GT', 'GE', 'LT', 'LE'),
         ('left', 'SUM', 'SUB'),
-        ('left', 'MUL', 'DIV'),
-        # ('right', 'IF'),
+        ('left', 'MUL', 'DIV', 'MOD'),
+        ('right', 'NOT'),
+        ('left', 'LCB', 'LRB', 'LSB', 'RCB', 'RRB', 'RSB'),
         ('left', 'IF'),
-        # ('right', 'epsilon'),
         ('left', 'ELIF', 'ELSE')
-        # ('nonassoc', 'ELSE')
     )
-
     def p_error(self, p):
         print('error', p.value)
         raise Exception('Parsing Error: invalid grammar at', p)
