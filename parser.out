@@ -42,9 +42,9 @@ Rule 32    stmt -> block
 Rule 33    stmt -> WHILE LRB exp RRB stmt
 Rule 34    stmt -> FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
 Rule 35    stmt -> IF LRB exp RRB stmt elseiflist other
-Rule 36    stmt -> PRINT LRB ID RRB SEMICOLON
-Rule 37    other -> ELSE stmt
-Rule 38    other -> <empty>
+Rule 36    other -> ELSE stmt
+Rule 37    other -> <empty>
+Rule 38    stmt -> PRINT LRB ID RRB SEMICOLON
 Rule 39    elseiflist -> elseiflist ELIF LRB exp RRB stmt
 Rule 40    elseiflist -> <empty>
 Rule 41    exp -> lvalue ASSIGN exp
@@ -85,7 +85,7 @@ BOOLEAN              : 8
 COMMA                : 13 20 69
 DIV                  : 56
 ELIF                 : 39
-ELSE                 : 37
+ELSE                 : 36
 EQ                   : 65
 ERROR                : 
 FALSE                : 61
@@ -94,13 +94,13 @@ FLOATNUMBER          : 59
 FOR                  : 34
 GE                   : 66
 GT                   : 62
-ID                   : 9 10 11 15 16 21 22 28 29 36 46 48
+ID                   : 9 10 11 15 16 21 22 28 29 38 46 48
 IF                   : 35
 INTEGER              : 6
 INTEGERNUMBER        : 58
 LCB                  : 25
 LE                   : 67
-LRB                  : 1 15 16 33 34 35 36 39 46 47 48
+LRB                  : 1 15 16 33 34 35 38 39 46 47 48
 LSB                  : 10 22 29
 LT                   : 63
 MAIN                 : 1
@@ -109,12 +109,12 @@ MUL                  : 55
 NE                   : 64
 NOT                  : 50
 OR                   : 51
-PRINT                : 36
+PRINT                : 38
 RCB                  : 25
 RETURN               : 30
-RRB                  : 1 15 16 33 34 35 36 39 46 47 48
+RRB                  : 1 15 16 33 34 35 38 39 46 47 48
 RSB                  : 10 22 29
-SEMICOLON            : 14 30 31 34 34 36
+SEMICOLON            : 14 30 31 34 34 38
 SUB                  : 49 54
 SUM                  : 53
 TRUE                 : 60
@@ -142,7 +142,7 @@ paramdecs            : 15 16
 paramdecslist        : 17 20
 program              : 0
 relop                : 43
-stmt                 : 26 33 34 35 37 39
+stmt                 : 26 33 34 35 36 39
 stmtlist             : 25 26
 type                 : 14 15 21 22
 vardec               : 4 23
@@ -1554,7 +1554,7 @@ state 74
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp
@@ -2111,7 +2111,7 @@ state 95
 
 state 96
 
-    (36) stmt -> PRINT . LRB ID RRB SEMICOLON
+    (38) stmt -> PRINT . LRB ID RRB SEMICOLON
 
     LRB             shift and go to state 106
 
@@ -2365,7 +2365,7 @@ state 105
 
 state 106
 
-    (36) stmt -> PRINT LRB . ID RRB SEMICOLON
+    (38) stmt -> PRINT LRB . ID RRB SEMICOLON
 
     ID              shift and go to state 112
 
@@ -2544,7 +2544,7 @@ state 111
 
 state 112
 
-    (36) stmt -> PRINT LRB ID . RRB SEMICOLON
+    (38) stmt -> PRINT LRB ID . RRB SEMICOLON
 
     RRB             shift and go to state 116
 
@@ -2558,7 +2558,7 @@ state 113
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp
@@ -2640,7 +2640,7 @@ state 115
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp
@@ -2682,7 +2682,7 @@ state 115
 
 state 116
 
-    (36) stmt -> PRINT LRB ID RRB . SEMICOLON
+    (38) stmt -> PRINT LRB ID RRB . SEMICOLON
 
     SEMICOLON       shift and go to state 120
 
@@ -2775,25 +2775,25 @@ state 119
 
 state 120
 
-    (36) stmt -> PRINT LRB ID RRB SEMICOLON .
+    (38) stmt -> PRINT LRB ID RRB SEMICOLON .
 
-    RCB             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    RETURN          reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    WHILE           reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    FOR             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    IF              reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    PRINT           reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    ID              reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    LRB             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    SUB             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    NOT             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    LCB             reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    INTEGERNUMBER   reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    FLOATNUMBER     reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    TRUE            reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    FALSE           reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    ELIF            reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
-    ELSE            reduce using rule 36 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    RCB             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    RETURN          reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    WHILE           reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FOR             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    IF              reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    PRINT           reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ID              reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    LRB             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    SUB             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    NOT             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    LCB             reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    INTEGERNUMBER   reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FLOATNUMBER     reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    TRUE            reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    FALSE           reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ELIF            reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
+    ELSE            reduce using rule 38 (stmt -> PRINT LRB ID RRB SEMICOLON .)
 
 
 state 121
@@ -2833,29 +2833,29 @@ state 122
 
     (35) stmt -> IF LRB exp RRB stmt elseiflist . other
     (39) elseiflist -> elseiflist . ELIF LRB exp RRB stmt
-    (37) other -> . ELSE stmt
-    (38) other -> .
+    (36) other -> . ELSE stmt
+    (37) other -> .
 
     ELIF            shift and go to state 125
     ELSE            shift and go to state 126
-    RCB             reduce using rule 38 (other -> .)
-    RETURN          reduce using rule 38 (other -> .)
-    WHILE           reduce using rule 38 (other -> .)
-    FOR             reduce using rule 38 (other -> .)
-    IF              reduce using rule 38 (other -> .)
-    PRINT           reduce using rule 38 (other -> .)
-    ID              reduce using rule 38 (other -> .)
-    LRB             reduce using rule 38 (other -> .)
-    SUB             reduce using rule 38 (other -> .)
-    NOT             reduce using rule 38 (other -> .)
-    LCB             reduce using rule 38 (other -> .)
-    INTEGERNUMBER   reduce using rule 38 (other -> .)
-    FLOATNUMBER     reduce using rule 38 (other -> .)
-    TRUE            reduce using rule 38 (other -> .)
-    FALSE           reduce using rule 38 (other -> .)
+    RCB             reduce using rule 37 (other -> .)
+    RETURN          reduce using rule 37 (other -> .)
+    WHILE           reduce using rule 37 (other -> .)
+    FOR             reduce using rule 37 (other -> .)
+    IF              reduce using rule 37 (other -> .)
+    PRINT           reduce using rule 37 (other -> .)
+    ID              reduce using rule 37 (other -> .)
+    LRB             reduce using rule 37 (other -> .)
+    SUB             reduce using rule 37 (other -> .)
+    NOT             reduce using rule 37 (other -> .)
+    LCB             reduce using rule 37 (other -> .)
+    INTEGERNUMBER   reduce using rule 37 (other -> .)
+    FLOATNUMBER     reduce using rule 37 (other -> .)
+    TRUE            reduce using rule 37 (other -> .)
+    FALSE           reduce using rule 37 (other -> .)
 
-  ! ELIF            [ reduce using rule 38 (other -> .) ]
-  ! ELSE            [ reduce using rule 38 (other -> .) ]
+  ! ELIF            [ reduce using rule 37 (other -> .) ]
+  ! ELSE            [ reduce using rule 37 (other -> .) ]
 
     other                          shift and go to state 124
 
@@ -2928,14 +2928,14 @@ state 125
 
 state 126
 
-    (37) other -> ELSE . stmt
+    (36) other -> ELSE . stmt
     (30) stmt -> . RETURN exp SEMICOLON
     (31) stmt -> . exp SEMICOLON
     (32) stmt -> . block
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp
@@ -2984,7 +2984,7 @@ state 127
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp
@@ -3059,25 +3059,25 @@ state 128
 
 state 129
 
-    (37) other -> ELSE stmt .
+    (36) other -> ELSE stmt .
 
-    RCB             reduce using rule 37 (other -> ELSE stmt .)
-    RETURN          reduce using rule 37 (other -> ELSE stmt .)
-    WHILE           reduce using rule 37 (other -> ELSE stmt .)
-    FOR             reduce using rule 37 (other -> ELSE stmt .)
-    IF              reduce using rule 37 (other -> ELSE stmt .)
-    PRINT           reduce using rule 37 (other -> ELSE stmt .)
-    ID              reduce using rule 37 (other -> ELSE stmt .)
-    LRB             reduce using rule 37 (other -> ELSE stmt .)
-    SUB             reduce using rule 37 (other -> ELSE stmt .)
-    NOT             reduce using rule 37 (other -> ELSE stmt .)
-    LCB             reduce using rule 37 (other -> ELSE stmt .)
-    INTEGERNUMBER   reduce using rule 37 (other -> ELSE stmt .)
-    FLOATNUMBER     reduce using rule 37 (other -> ELSE stmt .)
-    TRUE            reduce using rule 37 (other -> ELSE stmt .)
-    FALSE           reduce using rule 37 (other -> ELSE stmt .)
-    ELIF            reduce using rule 37 (other -> ELSE stmt .)
-    ELSE            reduce using rule 37 (other -> ELSE stmt .)
+    RCB             reduce using rule 36 (other -> ELSE stmt .)
+    RETURN          reduce using rule 36 (other -> ELSE stmt .)
+    WHILE           reduce using rule 36 (other -> ELSE stmt .)
+    FOR             reduce using rule 36 (other -> ELSE stmt .)
+    IF              reduce using rule 36 (other -> ELSE stmt .)
+    PRINT           reduce using rule 36 (other -> ELSE stmt .)
+    ID              reduce using rule 36 (other -> ELSE stmt .)
+    LRB             reduce using rule 36 (other -> ELSE stmt .)
+    SUB             reduce using rule 36 (other -> ELSE stmt .)
+    NOT             reduce using rule 36 (other -> ELSE stmt .)
+    LCB             reduce using rule 36 (other -> ELSE stmt .)
+    INTEGERNUMBER   reduce using rule 36 (other -> ELSE stmt .)
+    FLOATNUMBER     reduce using rule 36 (other -> ELSE stmt .)
+    TRUE            reduce using rule 36 (other -> ELSE stmt .)
+    FALSE           reduce using rule 36 (other -> ELSE stmt .)
+    ELIF            reduce using rule 36 (other -> ELSE stmt .)
+    ELSE            reduce using rule 36 (other -> ELSE stmt .)
 
 
 state 130
@@ -3149,7 +3149,7 @@ state 132
     (33) stmt -> . WHILE LRB exp RRB stmt
     (34) stmt -> . FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
     (35) stmt -> . IF LRB exp RRB stmt elseiflist other
-    (36) stmt -> . PRINT LRB ID RRB SEMICOLON
+    (38) stmt -> . PRINT LRB ID RRB SEMICOLON
     (41) exp -> . lvalue ASSIGN exp
     (42) exp -> . exp operator exp
     (43) exp -> . exp relop exp

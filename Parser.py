@@ -288,14 +288,6 @@ class Parser:
         stmt : IF LRB exp RRB stmt elseiflist other
         """)
 
-    def p_stmt_PRINT(self, p):
-        """
-        stmt : PRINT LRB ID RRB SEMICOLON
-        """
-        print("""
-        stmt : PRINT LRB ID RRB SEMICOLON
-        """)
-
     def p_other(self, p):
         """
         other : ELSE stmt
@@ -312,12 +304,21 @@ class Parser:
         other : 
         """)
 
+
+    def p_stmt_PRINT(self, p):
+        """
+        stmt : PRINT LRB ID RRB SEMICOLON
+        """
+        print("""
+        stmt : PRINT LRB ID RRB SEMICOLON
+        """)
+
     def p_elseiflist(self, p):
         """
         elseiflist : elseiflist ELIF LRB exp RRB stmt
         """
         print("""
-        elseiflist : elseiflist ELIF LRB exp RRB stmt 
+        elseiflist : elseiflist ELIF LRB exp RRB stmt
          """)
 
     def p_elseiflist_Landa(self, p):
@@ -325,7 +326,7 @@ class Parser:
         elseiflist :
         """
         print("""
-        elseiflist : 
+        elseiflist :
          """)
 
     def p_exp_lvalue(self, p):
