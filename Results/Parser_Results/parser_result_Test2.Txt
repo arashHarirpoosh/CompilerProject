@@ -1,0 +1,974 @@
+
+        declist :
+
+
+        type : INTEGER
+
+
+        iddec : ID
+
+
+        idlist : iddec
+
+
+        iddec : ID
+
+
+        idlist : idlist COMMA iddec
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        iddec : ID LSB exp RSB
+
+
+        idlist : idlist COMMA iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        dec : vardec
+
+
+        declist :  declist dec
+
+
+        type : FLOAT
+
+
+        iddec : ID
+
+
+        idlist : iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        dec : vardec
+
+
+        declist :  declist dec
+
+
+        type : INTEGER
+
+
+        paramdec : type ID
+
+
+        paramdecslist : paramdec
+
+
+        type : INTEGER
+
+
+        paramdec : type ID LSB RSB
+
+
+        paramdecslist : paramdecslist COMMA paramdec
+
+
+        type : INTEGER
+
+
+        paramdec : type ID
+
+
+        paramdecslist : paramdecslist COMMA paramdec
+
+
+        paramdecs : paramdecslist
+
+
+        varlist :
+
+
+        stmtlist :
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        relop : GT
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp relop exp
+
+
+        type : INTEGER
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUB
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        iddec : ID ASSIGN exp
+
+
+        idlist : iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        varlist :
+
+
+        varlist : vardec  varlist
+
+
+        stmtlist :
+
+
+        stmt : PRINT LRB ID RRB SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        stmt : block
+
+
+        elseiflist :
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        relop : EQ
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp relop exp
+
+
+        stmt : PRINT LRB ID RRB SEMICOLON
+
+
+        elseiflist : elseiflist ELIF LRB exp RRB stmt
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : explist COMMA exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUB
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        explist : explist COMMA exp
+
+
+        exp : ID LRB explist RRB
+
+
+        stmt : exp SEMICOLON
+
+
+        other : ELSE stmt
+
+
+        stmt : IF LRB exp RRB stmt elseiflist other
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        funcdec : VOID ID LRB paramdecs RRB block
+
+
+        dec : funcdec
+
+
+        declist :  declist dec
+
+
+        type : INTEGER
+
+
+        type : INTEGER
+
+
+        paramdec : type ID
+
+
+        paramdecslist : paramdec
+
+
+        type : INTEGER
+
+
+        paramdec : type ID
+
+
+        paramdecslist : paramdecslist COMMA paramdec
+
+
+        type : INTEGER
+
+
+        paramdec : type ID
+
+
+        paramdecslist : paramdecslist COMMA paramdec
+
+
+        paramdecs : paramdecslist
+
+
+        type : INTEGER
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        iddec : ID LSB exp RSB
+
+
+        idlist : iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        varlist :
+
+
+        varlist : vardec  varlist
+
+
+        stmtlist :
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : lvalue ASSIGN exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        relop : LT
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp relop exp
+
+
+        lvalue : ID
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        exp : lvalue ASSIGN exp
+
+
+        varlist :
+
+
+        stmtlist :
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        lvalue : ID LSB exp RSB
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        stmt : PRINT LRB ID RRB SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        stmt : block
+
+
+        stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : explist COMMA exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : explist COMMA exp
+
+
+        exp : ID LRB explist RRB
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        stmt : RETURN exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        funcdec : type ID LRB paramdecs RRB block
+
+
+        dec : funcdec
+
+
+        declist :  declist dec
+
+
+        type : INTEGER
+
+
+        iddec : ID
+
+
+        idlist : iddec
+
+
+        iddec : ID
+
+
+        idlist : idlist COMMA iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        varlist :
+
+
+        varlist : vardec  varlist
+
+
+        stmtlist :
+
+
+        lvalue : ID
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        explist : explist COMMA exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : explist COMMA exp
+
+
+        exp : ID LRB explist RRB
+
+
+        relop : LT
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp relop exp
+
+
+        varlist :
+
+
+        stmtlist :
+
+
+        type : INTEGER
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        explist : explist COMMA exp
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        explist : explist COMMA exp
+
+
+        exp : ID LRB explist RRB
+
+
+        iddec : ID LSB exp RSB
+
+
+        idlist : iddec
+
+
+        vardec : type idlist SEMICOLON
+
+
+
+        varlist :
+
+
+        varlist : vardec  varlist
+
+
+        stmtlist :
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        stmt : block
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        lvalue : ID
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : SUM
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        operator : SUM
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        operator : MUL
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        relop : LT
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp relop exp
+
+
+        operator : OR
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        relop : LT
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp relop exp
+
+
+        operator : AND
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        operator : SUB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        exp : exp operator exp
+
+
+        exp : LRB exp RRB
+
+
+        exp : exp operator exp
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        stmt : block
+
+
+        stmt : WHILE LRB exp RRB stmt
+
+
+        stmtlist : stmtlist stmt
+
+
+        block : LCB varlist stmtlist RCB
+
+
+        program : declist MAIN LRB RRB block

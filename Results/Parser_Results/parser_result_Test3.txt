@@ -39,25 +39,6 @@
         declist :  declist dec
 
 
-        type : FLOAT
-
-
-        iddec : ID
-
-
-        idlist : iddec
-
-
-        vardec : type idlist SEMICOLON
-
-
-
-        dec : vardec
-
-
-        declist :  declist dec
-
-
         varlist :
 
 
@@ -112,77 +93,19 @@
         stmtlist : stmtlist stmt
 
 
-        lvalue : ID
-
-
         const : INTEGERNUMBER
 
 
         exp : const
 
 
-        exp : lvalue ASSIGN exp
-
-
-        lvalue : ID
+        lvalue : ID LSB exp RSB
 
 
         exp : lvalue
-
-
-        relop : LT
-
-
-        const : INTEGERNUMBER
-
-
-        exp : const
-
-
-        exp : exp relop exp
-
-
-        lvalue : ID
-
-
-        lvalue : ID
-
-
-        exp : lvalue
-
-
-        operator : SUM
-
-
-        const : INTEGERNUMBER
-
-
-        exp : const
-
-
-        exp : exp operator exp
-
-
-        exp : lvalue ASSIGN exp
-
-
-        type : INTEGER
-
-
-        iddec : ID
-
-
-        idlist : iddec
-
-
-        vardec : type idlist SEMICOLON
-
 
 
         varlist :
-
-
-        varlist : vardec  varlist
 
 
         stmtlist :
@@ -191,82 +114,10 @@
         lvalue : ID
 
 
-        exp : lvalue
-
-
-        lvalue : ID LSB exp RSB
-
-
-        lvalue : ID
-
-
-        exp : lvalue
-
-
-        operator : SUB
-
-
         const : INTEGERNUMBER
 
 
         exp : const
-
-
-        exp : exp operator exp
-
-
-        lvalue : ID LSB exp RSB
-
-
-        exp : lvalue
-
-
-        operator : SUM
-
-
-        lvalue : ID
-
-
-        exp : lvalue
-
-
-        operator : SUB
-
-
-        const : INTEGERNUMBER
-
-
-        exp : const
-
-
-        exp : exp operator exp
-
-
-        lvalue : ID LSB exp RSB
-
-
-        exp : lvalue
-
-
-        exp : exp operator exp
-
-
-        exp : lvalue ASSIGN exp
-
-
-        stmt : exp SEMICOLON
-
-
-        stmtlist : stmtlist stmt
-
-
-        lvalue : ID
-
-
-        lvalue : ID
-
-
-        exp : lvalue
 
 
         lvalue : ID LSB exp RSB
@@ -290,13 +141,85 @@
         stmtlist : stmtlist stmt
 
 
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        operator : SUB
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        exp : lvalue
+
+
+        exp : exp operator exp
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
+        const : INTEGERNUMBER
+
+
+        exp : const
+
+
+        lvalue : ID LSB exp RSB
+
+
+        lvalue : ID
+
+
+        exp : lvalue
+
+
+        exp : lvalue ASSIGN exp
+
+
+        stmt : exp SEMICOLON
+
+
+        stmtlist : stmtlist stmt
+
+
         block : LCB varlist stmtlist RCB
 
 
         stmt : block
 
 
-        stmt : FOR LRB exp SEMICOLON exp SEMICOLON exp RRB stmt
+        stmt : WHILE LRB exp RRB stmt
 
 
         stmtlist : stmtlist stmt
