@@ -561,22 +561,6 @@ class Parser:
          """)
 
     # Deeper Tokens Higher Priority
-    # precedence = (
-    #     ('left', 'GT', 'LT', 'NE', 'EQ', 'GE', 'LE'),  # Nonassociative operators
-    #     ('left', 'VOID', 'INTEGER', 'FLOAT', 'BOOLEAN'),
-    #     ('right', 'ASSIGN', 'NOT', 'SEMICOLON'),
-    #     ('left', 'LCB', 'LRB', 'LSB'),
-    #     ('right', 'RCB', 'RRB', 'RSB'),
-    #     ('right', 'NOT'),
-    #     ('left', 'OR', 'AND'),
-    #     ('left', 'SUM', 'SUB'),
-    #     ('left', 'MUL', 'DIV'),
-    #     # ('right', 'IF'),
-    #     ('left', 'IF'),
-    #     # ('right', 'epsilon'),
-    #     ('left', 'ELIF', 'ELSE')
-    #     # ('nonassoc', 'ELSE')
-    # )
     precedence = (
         ('left', 'COMMA'),
         ('right', 'ASSIGN'),
@@ -591,6 +575,7 @@ class Parser:
         ('left', 'IF'),
         ('left', 'ELIF', 'ELSE')
     )
+
     def p_error(self, p):
         print('error', p.value)
         raise Exception('Parsing Error: invalid grammar at', p)
